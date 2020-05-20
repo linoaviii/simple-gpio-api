@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>GPIO test</title>
+        <style>
+          .button-on {
+              display: block;
+              width: 60px;
+              height: 20px;
+              background: #4E9CAF;
+              padding: 10px;
+              text-align: center;
+              border-radius: 5px;
+              color: white;
+              font-weight: bold;
+              margin-left:80px;
+          }
+          
+          .button-off {
+              display: block;
+              width: 60px;
+              height: 20px;
+              background: #AAA;
+              padding: 10px;
+              text-align: center;
+              border-radius: 5px;
+              color: white;
+              font-weight: bold;
+          }
+        </style>
+    </head>
+
+    <body>
+        <h1>GPIO test</h1>
+        <table border="1" style="border-collapse: collapse; margin: 15px">
+          <tr style="height: 50px">
+            <th style="width: 80px">GPIO</th>
+            <th style="width: 80px">Type</th>
+            <th style="width: 80px">Value</th>
+            <th style="width: 160px">Action</th>
+          </tr style="height: 30px">
+          {% for k, v in gpio_states.items() %}
+          <tr style="height: 30px">
+            <td>{{ k }}</td>
+            <td>
+              {% if gpio_functions[k] ==0 %}
+                Out
+              {% endif %}
+              {% if gpio_functions[k] ==1 %}
+                In
+              {% endif %}
+            </td>
+            <td>
+              {% if v==0 %}
+                Off
+              {% endif %}
+              {% if v==1 %}
+                <b style="color:green">On</b>
+              {% endif %}
+            </td>
+            <td>
+              {% if gpio_functions[k] ==0 %}
+                {% if v==0 %}
+                   <a href='/{{k}}/1' class="button-on" >Turn on</a>
+                {% endif %}
+                {% if v==1 %}
+                   <a href='/{{k}}/0' class="button-off" >Turn off</a>
+                {% endif %}
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+    </body>
+</html>

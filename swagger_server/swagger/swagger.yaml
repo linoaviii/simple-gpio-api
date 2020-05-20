@@ -1,0 +1,148 @@
+openapi: 3.0.0
+info:
+  title: RaspberryPi simple GPIO API
+  description: Simple Web api used to read and Write RaspberryPi GPIO states
+  contact:
+    name: David Audran
+    url: http://davidaudran.com
+    email: contact@davidaudran.com
+  version: 1.0.0
+servers:
+- url: http://127.0.0.1
+  description: Local server
+paths:
+  /:
+    get:
+      summary: Test interface
+      description: Web page showing all GPIO states and allow user to change GPIO
+        values
+      operationId: root_get
+      responses:
+        "200":
+          description: html test interface
+          content:
+            text/html:
+              schema:
+                type: string
+                x-content-type: text/html
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /{gpio_number}/{gpio_state}:
+    get:
+      summary: Action on test interface
+      description: Change GPIO state in test interface
+        values
+      operationId: root_gpio_number_gpio_state_get
+      parameters:
+      - name: gpio_number
+        in: path
+        description: GPIO number in BCM mode
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+        example: 2
+      - name: gpio_state
+        in: path
+        description: New GPIO state in BCM mode
+        required: true
+        style: simple
+        explode: false
+        schema:
+          maximum: 1
+          minimum: 0
+          type: integer
+        example: 1
+      responses:
+        "200":
+          description: html test interface after gpio state change
+          content:
+            text/html:
+              schema:
+                type: string
+                x-content-type: text/html
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /gpio/{gpio_number}:
+    get:
+      summary: Read a GPIO state
+      description: Read the GPIO {gpio_number} state in BCM mode
+      operationId: gpio_gpio_number_get
+      parameters:
+      - name: gpio_number
+        in: path
+        description: GPIO number in BCM mode
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+        example: 2
+      responses:
+        "200":
+          description: GPIO state, 1 if up, 0 if down and -1 if not readable
+          content:
+            text/plain:
+              schema:
+                maximum: 1
+                minimum: -1
+                type: integer
+                example: 1
+                x-content-type: text/plain
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /gpio/{gpio_number}/{gpio_state}:
+    get:
+      summary: Write a GPIO state
+      description: Write the GPIO {gpio_number} state in BCM mode
+      operationId: gpio_gpio_number_gpio_state_get
+      parameters:
+      - name: gpio_number
+        in: path
+        description: GPIO number in BCM mode
+        required: true
+        style: simple
+        explode: false
+        schema:
+          minimum: 1
+          type: integer
+        example: 2
+      - name: gpio_state
+        in: path
+        description: New GPIO state in BCM mode
+        required: true
+        style: simple
+        explode: false
+        schema:
+          maximum: 1
+          minimum: 0
+          type: integer
+        example: 1
+      responses:
+        "200":
+          description: New GPIO state, 1 if up, 0 if down and -1 if not readable
+          content:
+            text/plain:
+              schema:
+                maximum: 1
+                minimum: -1
+                type: integer
+                example: 1
+                x-content-type: text/plain
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /doc:
+    get:
+      summary: API documentation
+      description: show the Api documentation details in html
+      operationId: doc_get
+      responses:
+        "200":
+          description: html Api documentation details
+          content:
+            text/html:
+              schema:
+                type: string
+                x-content-type: text/html
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+components: {}
+

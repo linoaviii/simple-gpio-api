@@ -1,0 +1,10 @@
+[Unit]
+Description=GPIO access API
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/home/pi/simple-gpio-api/start.sh
+
+[Install]
+WantedBy=multi-user.target
