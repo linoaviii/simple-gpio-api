@@ -9,7 +9,7 @@ This API is composed byt a GPIO web test :
 ```
 http://{IP_RASPBERRY}
 ```
-![web api preview](simple-gpio-api/images/test-web.jpg)
+![web api preview](images/test-web.jpg)
 
 And an acces to GPIO by a simple URL:
 
@@ -83,7 +83,7 @@ and it's done
 ```
 sh simple-gpio-api/start.sh
 ```
-![webservice started preview](simple-gpio-api/images/webservice-started.jpg)
+![webservice started preview](images/webservice-started.jpg)
 
 Don't close the terminal to keep API alive.
 
